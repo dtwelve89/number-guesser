@@ -9,8 +9,8 @@ GAME FUNCTION:
 
 //Game values
 let min = 1,
-    max = 2,
-    winningNum = 2,
+    max = 12,
+    winningNum = getRandomNum(min, max),
     guessesLeft = 3;
 
 // UI Elements
@@ -25,6 +25,12 @@ const game = document.querySelector('#game'),
 minNum.textContent = min;
 maxNum.textContent = max;
 
+// Plau again event listener
+game.addEventListener('mousedown', function(e){
+  if(e.target.className === 'play-again'){
+    window.location.reload();
+  }
+});
 // Listen for guess
 guessBtn.addEventListener('click', function(){
   let guess = parseInt(guessInput.value);
@@ -76,6 +82,15 @@ function gameOver(won, msg){
   message.style.color = color;
   // Set message
   setMessage(msg);
+
+  // Play again
+  guessBtn.value = 'Play again';
+  guessBtn.className += 'play-again';
+}
+
+// Get Winning Number
+function getRandomNum(min, max){
+  console.log(Math.floor(Math.random()*(max - min + 1) + min));
 }
 
 // Set message
